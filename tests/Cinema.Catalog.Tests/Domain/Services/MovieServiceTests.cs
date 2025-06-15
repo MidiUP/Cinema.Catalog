@@ -1,4 +1,5 @@
-﻿using Cinema.Catalog.Domain.Exceptions;
+﻿using AutoFixture;
+using Cinema.Catalog.Domain.Exceptions;
 using Cinema.Catalog.Domain.Infrastructure.ApiFacades;
 using Cinema.Catalog.Domain.Models;
 using Cinema.Catalog.Domain.Services;
@@ -10,6 +11,7 @@ public class MovieServiceTests
 {
     private readonly Mock<ITmdbApiFacade> _tmdbApiFacadeMock;
     private readonly MovieService _service;
+    private readonly Fixture _fixture = new Fixture();
 
     public MovieServiceTests()
     {
@@ -22,7 +24,7 @@ public class MovieServiceTests
     {
         // Arrange
         var movieId = 42;
-        var expected = new DetailsMovieModel { Id = movieId, Title = "Test Movie" };
+        var expected = _fixture.Create<DetailsMovieModel>();
         _tmdbApiFacadeMock
             .Setup(f => f.GetDetailsMovieAsync(movieId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(expected);

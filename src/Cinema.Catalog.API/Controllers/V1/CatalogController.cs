@@ -3,9 +3,11 @@ using Cinema.Catalog.Domain.Dtos.Response;
 using Cinema.Catalog.Domain.Models;
 using Cinema.Catalog.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Cinema.Catalog.API.Controllers.V1;
 
+[ExcludeFromCodeCoverage]
 [ApiVersion("1")]
 [CinemaCatalogVersionedRoute("1")]
 public class MoviesController(IMovieService movieService) : CinemaCatalogControllerBase
