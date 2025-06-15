@@ -1,5 +1,8 @@
-﻿namespace Cinema.Catalog.Domain.Exceptions;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Cinema.Catalog.Domain.Exceptions;
+
+[ExcludeFromCodeCoverage]
 public abstract class CinemaCatalogException : Exception
 {
     public abstract int ERROR_CODE { get; }

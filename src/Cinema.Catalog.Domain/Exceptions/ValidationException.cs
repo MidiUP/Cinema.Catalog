@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 
 namespace Cinema.Catalog.Domain.Exceptions;
 
+[ExcludeFromCodeCoverage]
 public class ValidationException : CinemaCatalogException
 {
     const string ERROR_EXCEPTION_MESSAGE = "Validation Exception";

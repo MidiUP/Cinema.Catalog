@@ -1,4 +1,5 @@
-﻿using Cinema.Catalog.Domain.Shared;
+﻿using Cinema.Catalog.Domain.Models.Interfaces;
+using Cinema.Catalog.Domain.Shared;
 
 namespace Cinema.Catalog.Domain.Models;
 

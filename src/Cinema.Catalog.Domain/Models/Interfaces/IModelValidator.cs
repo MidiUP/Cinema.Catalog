@@ -1,6 +1,6 @@
 ﻿using Cinema.Catalog.Domain.Shared;
 
-namespace Cinema.Catalog.Domain.Models;
+namespace Cinema.Catalog.Domain.Models.Interfaces;
 
 public interface IModelValidator
 {

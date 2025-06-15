@@ -1,4 +1,6 @@
-﻿namespace Cinema.Catalog.Domain.Shared;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Cinema.Catalog.Domain.Shared;
 
 public class ValidationResult
 {
