@@ -4,8 +4,10 @@ using Cinema.Catalog.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.CodeAnalysis;
 
+namespace Cinema.Catalog.API;
+
 [ExcludeFromCodeCoverage]
-internal static class Program
+public partial class Program
 {
     public static void Main(string[] args)
     {
@@ -58,5 +60,5 @@ internal static class Program
         }
 
         app.Run();
-    } 
+    }
 }
