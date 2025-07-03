@@ -1,15 +1,16 @@
 ﻿using Cinema.Catalog.Domain.Infrastructure.ApiFacades;
 using Cinema.Catalog.Infrastructure.ApiFacades;
 using Cinema.Catalog.Infrastructure.HttpClients;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cinema.Catalog.Infrastructure;
 
 public static class Bootstrap
 {
-    public static void AddInfrastructureServices(this IServiceCollection services)
+    public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddHttpClients();
+        services.AddHttpClients(configuration);
         services.AddApiFacades();
     }
 

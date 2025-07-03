@@ -6,10 +6,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ENV": "dev",
-        "TMDB_API_BASE_URL": "https://api.themoviedb.org/3/",
-        "TMDB_API_KEY": "1f54bd990f1cdfb230adb312546d765d",
-        "TMDB_API_AUTH_TOKEN": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZWQ5Y2E0NTUzZThiZmRmMjk5NjI1ZDI4ZjNlMGM0NCIsIm5iZiI6MTcyODQxODM3OS4zNzk5MjIsInN1YiI6IjY3MDU4Yjc1MDAwMDAwMDAwMDU4NTNiMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p-MmF0K7-ku9kDlcyg4Ry8IeQMiufz5zTK-VT5wuOu8"
+        "ENV": "dev"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5093"

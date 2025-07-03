@@ -1,5 +1,6 @@
 using Cinema.Catalog.API.Filters;
 using Cinema.Catalog.Domain;
+using Cinema.Catalog.Domain.Shared;
 using Cinema.Catalog.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.CodeAnalysis;
@@ -41,8 +42,9 @@ public partial class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.ConfigureOptions(builder.Configuration);
         builder.Services.AddDomainServices();
-        builder.Services.AddInfrastructureServices();
+        builder.Services.AddInfrastructureServices(builder.Configuration);
 
         var app = builder.Build();
 

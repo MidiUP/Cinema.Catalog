@@ -1,6 +1,7 @@
 ﻿using Cinema.Catalog.Domain.Shared;
 using Cinema.Catalog.Infrastructure.HttpClients.GatewayAdapters;
 using Cinema.Catalog.Infrastructure.HttpClients.Handlers;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
@@ -10,18 +11,20 @@ namespace Cinema.Catalog.Infrastructure.HttpClients;
 
 public static class Setup
 {
-    public static void AddHttpClients(this IServiceCollection services)
+    public static void AddHttpClients(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTmdbApiApiHttpClient();
+        services.AddTmdbApiApiHttpClient(configuration);
         services.AddHandlersHttp();
         services.AddGateways();
     }
 
-    private static void AddTmdbApiApiHttpClient(this IServiceCollection services)
+    private static void AddTmdbApiApiHttpClient(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddHttpClient(Constants.TmdbApi.NAME, httpClient =>
+        var tmdbApiOptions = configuration.GetSection("TmdbApi").Get<TmdbApiOptions>();
+
+        services.AddHttpClient(tmdbApiOptions!.Name, httpClient =>
         {
-            httpClient.BaseAddress = new Uri(Constants.TmdbApi.BASE_URL);
+            httpClient.BaseAddress = new Uri(tmdbApiOptions.BaseUrl);
         })
         .AddPolicyHandler(GetRetryPolicy())
         .AddHttpMessageHandler<AuthenticateCustomHandler<AuthBasicImdb>>();

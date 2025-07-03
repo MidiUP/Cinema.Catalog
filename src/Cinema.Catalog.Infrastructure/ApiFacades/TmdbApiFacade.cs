@@ -4,22 +4,29 @@ using Cinema.Catalog.Domain.Mappers;
 using Cinema.Catalog.Domain.Models;
 using Cinema.Catalog.Domain.Shared;
 using Cinema.Catalog.Infrastructure.HttpClients;
+using Microsoft.Extensions.Options;
+using System.Net.Http;
 
 namespace Cinema.Catalog.Infrastructure.ApiFacades;
 
-public class TmdbApiFacade(IHttpClientFactory httpClientFactory) : ITmdbApiFacade
+public class TmdbApiFacade : ITmdbApiFacade
 {
-    private readonly HttpClient _httpClient = httpClientFactory.CreateClient(Constants.TmdbApi.NAME);
-    private readonly string API_KEY = Constants.TmdbApi.API_KEY;
-    private readonly string QUERY_LANGUAGE = Constants.TmdbApi.LANGUAGE;
+    private readonly HttpClient _httpClient;
+    private readonly TmdbApiOptions _tmdbApiOptions;
+
+    public TmdbApiFacade(IHttpClientFactory httpClientFactory, IOptions<TmdbApiOptions> options)
+    {
+        _tmdbApiOptions = options.Value;
+        _httpClient = httpClientFactory.CreateClient(_tmdbApiOptions.Name);
+    }
 
     public async Task<DetailsMovieModel> GetDetailsMovieAsync(int movieId, CancellationToken cancellationToken = default)
     {
         var path = $"movie/{movieId}";
         var queryParams = new Dictionary<string, string>
         {
-            ["api_key"] = API_KEY,
-            ["language"] = QUERY_LANGUAGE
+            ["api_key"] = _tmdbApiOptions.ApiKey,
+            ["language"] = _tmdbApiOptions.Language
         };
 
         // Try catch para corrigir status code errado na resposta da API, devolve erro 404 ao não encontrar filme
@@ -29,7 +36,7 @@ public class TmdbApiFacade(IHttpClientFactory httpClientFactory) : ITmdbApiFacad
         }catch(Exception ex)
         {
             if (ex.Message == "Response status code does not indicate success: 404 (Not Found).")
-                return null;
+                return null!;
             throw;
         }
 
@@ -41,8 +48,8 @@ public class TmdbApiFacade(IHttpClientFactory httpClientFactory) : ITmdbApiFacad
         var queryParams = new Dictionary<string, string>
         {
             ["query"] = searchMoviesModel.TermSearch,
-            ["api_key"] = API_KEY,
-            ["language"] = QUERY_LANGUAGE
+            ["api_key"] = _tmdbApiOptions.ApiKey,
+            ["language"] = _tmdbApiOptions.Language
         };
 
         if (searchMoviesModel.PremiereYear > 0)
