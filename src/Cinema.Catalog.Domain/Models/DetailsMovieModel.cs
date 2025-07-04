@@ -1,6 +1,5 @@
 ﻿namespace Cinema.Catalog.Domain.Models
 {
-
 	public class Genre
 	{
 		public int Id { get; set; }

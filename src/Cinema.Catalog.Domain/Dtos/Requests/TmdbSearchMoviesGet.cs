@@ -3,33 +3,39 @@ using System.Diagnostics.CodeAnalysis;
 namespace Cinema.Catalog.Domain.Dtos.Requests;
 
 /// <summary>
-/// Modelo do entrada para a rota /search/movie do TMDb API
-/// (https://developers.themoviedb.org/3/search/search-movies)
+/// Modelo de entrada para a rota <c>/search/movie</c> da API TMDb.
 /// <para>
-/// Este modelo representa exatamente os parametros para requisicoes na
-/// rota search/movie API TMDb e
-/// eh utilizado como parametro de entrada para o metodo
-/// <see cref="ITmdbApi.SearchMovies"/>.
+/// Representa os parâmetros aceitos pela rota <c>search/movie</c> da TMDb API,
+/// conforme documentação oficial: https://developers.themoviedb.org/3/search/search-movies.
 /// </para>
-/// <para>    
-/// Note que esta classe eh interna ao Adaptador, 
-/// os dados serao mapeados a partir de <see cref="Models.Pesquisa" />.
-/// O mapeamento eh feito em <see cref="TmdbAdapter.GetFilmesAsync"/>.
+/// <para>
+/// Utilizado como parâmetro de entrada no método <see cref="ITmdbApi.SearchMovies"/>.
+/// </para>
+/// <para>
+/// Esta classe é interna ao adaptador; os dados são mapeados a partir de <see cref="Models.Pesquisa"/>.
+/// O mapeamento ocorre em <see cref="TmdbAdapter.GetFilmesAsync"/>.
 /// </para>
 /// </summary>
-
 [ExcludeFromCodeCoverage]
 public class TmdbSearchMoviesGet
 {
+    /// <summary>
+    /// Texto da busca.
+    /// </summary>
     public string Query { get; set; } = null!;
-    public string ApiKey { get; set; } = null!;
-    public string Language { get; set; } = null!;
-    public int? Year { get; set; } = null!;
-}
 
-[ExcludeFromCodeCoverage]
-public class TmdbSearchMoviesGetById
-{
-    public string Query { get; set; } = null!;
+    /// <summary>
+    /// Chave de API do TMDb.
+    /// </summary>
     public string ApiKey { get; set; } = null!;
+
+    /// <summary>
+    /// Idioma dos resultados (ex: "pt-BR").
+    /// </summary>
+    public string Language { get; set; } = null!;
+
+    /// <summary>
+    /// Ano de lançamento para filtrar os resultados.
+    /// </summary>
+    public int? Year { get; set; } = null!;
 }
